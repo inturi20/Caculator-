@@ -1,0 +1,37 @@
+let currentResult = '';
+let operatorClicked = false;
+let operatorType = '';
+
+function appendNumber(number) {
+    if (operatorClicked) {
+        currentResult = '';
+        operatorClicked = false;
+    }
+    currentResult += number;
+    document.getElementById('result').value = currentResult;
+}
+
+function operator(op) {
+    if (currentResult !== '') {
+        operatorClicked = true;
+        operatorType = op;
+        document.getElementById('result').value = currentResult + ' ' + op;
+    }
+}
+
+function calculate() {
+    const resultField = document.getElementById('result');
+    const [num1, num2] = resultField.value.split(operatorType).map(Number);
+
+    if (operatorType === '+') {
+        resultField.value = num1 + num2;
+    } else if (operatorType === '-') {
+        resultField.value = num1 - num2;
+    }
+    operatorClicked = false;
+}
+
+function clearResult() {
+    currentResult = '';
+    document.getElementById('result').value = '';
+}
